@@ -1,26 +1,17 @@
 ---
-title: "R Final"
+title: "R Final Project, Juliet, Charlie, and Devya"
 format: html
 editor: visual
 ---
 
-## Quarto
+## Ski Jumping Results
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Our data set is the Results of (almost) all important ski jumping competitions from 2009 to now. The observations contain standard information about every jump - style points, distance, take-off speed, wind etc.
 
-## Running Code
+## Research Questions: 
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+1.  How strong is the correlation between distance and style marks?
 
-```{r}
-1 + 1
-```
+2.  Can we create a model that predicts the performance/distance of an athlete in a given competition?
 
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+\
