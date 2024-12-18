@@ -54,7 +54,7 @@ Our data set is the Results of (almost) all important ski jumping competitions f
     summary(skiLm) #Correlation = (R^2)^1/2 = 0.495
     ```
 
-2.  What is the correlation of Wind Speed and Distance? \
+2.  What is the correlation of Wind Speed and Distance?\
 
 ```{r}
 #Load the packages
@@ -76,6 +76,18 @@ ggplot(CleanResults, aes(x = WindSpeed, y = Distance)) +
 
 
 ```
- Stashed changes
 
-\
+## Linear Regression: Distance vs WindSpeed
+
+```{r}
+# Fit a linear model
+model <- lm(Distance ~ WindSpeed, data = CleanResults)
+
+# Perform ANOVA on the model
+anova_results <- anova(model)
+
+# Print results
+print(anova_results)
+
+
+```
