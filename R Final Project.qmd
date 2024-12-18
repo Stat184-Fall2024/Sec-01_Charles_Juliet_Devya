@@ -1,6 +1,6 @@
 ---
 title: "R Final Project, Juliet, Charlie, and Devya"
-format: html
+format: pdf
 editor: visual
 ---
 
@@ -54,4 +54,40 @@ Our data set is the Results of (almost) all important ski jumping competitions f
     summary(skiLm) #Correlation = (R^2)^1/2 = 0.495
     ```
 
-2.  Can we create a model that predicts the performance/distance of an athlete in a given competition?
+2.  What is the correlation of Wind Speed and Distance?\
+
+```{r}
+#Load the packages
+library(ggplot2)
+
+#Plot the relationship between Wind Speed and Distance
+ggplot(CleanResults, aes(x = Distance, y = WindSpeed)) +
+  geom_point(color = "blue") +
+  labs(title = "Scatter Plot of Distance vs Wind Speed",
+       x = "Distance", y = "Wind Speed")
+
+ggplot(CleanResults, aes(x = WindSpeed, y = Distance)) +
+  geom_point(color = "blue", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") + # Add linear regression line
+  labs(title = "Relationship Between Distance and Wind Speed",
+       x = "Wind Speed",
+       y = "Distance") +
+  theme_minimal()
+
+
+```
+
+## Linear Regression: Distance vs WindSpeed
+
+```{r}
+# Fit a linear model
+model <- lm(Distance ~ WindSpeed, data = CleanResults)
+
+# Perform ANOVA on the model
+anova_results <- anova(model)
+
+# Print results
+print(anova_results)
+
+
+```
