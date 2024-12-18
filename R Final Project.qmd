@@ -12,6 +12,73 @@ Our data set is the Results of (almost) all important ski jumping competitions f
 
 1.  How strong is the correlation between distance and style marks?
 
+<<<<<<< Updated upstream
 2.  Can we create a model that predicts the performance/distance of an athlete in a given competition?
+=======
+    ```{r}
+    library(dplyr)
+    library(tidyverse)
+    ```
+
+    ```{r}
+    Rawresults <- all_results
+    CleanResults <- Rawresults %>%
+      rename("TotalPoints" = points, #Rename variable columns
+             "WindSpeed" = speed,
+             "Distance" = dist,
+             "Points_DistWind" = dist_points,
+             "JudgeA" = note_1,
+             "JudgeB" = note_2,
+             "JudgeC" = note_3,
+             "JudgeD" = note_4,
+             "JudgeE" = note_5,
+             "StylePoints" = note_points) %>%  
+      mutate(AverageStylePoints = (JudgeA+JudgeB+JudgeC+JudgeD+JudgeE)/5) %>% #Add a column for average style points from judges
+      filter(TotalPoints!="NA") %>% #Filter out empty columns
+      filter(WindSpeed!="NA") %>% 
+      filter(Distance!="NA") %>% 
+      filter(Points_DistWind!="NA") %>% 
+      filter(JudgeA!="NA") %>%
+      filter(JudgeB!="NA") %>%
+      filter(JudgeC!="NA") %>%
+      filter(JudgeD!="NA") %>%
+      filter(JudgeE!="NA")  %>% 
+      filter(wind!="NA") %>% 
+      filter(wind_comp!="NA") %>% 
+      filter(gate_points!="NA") %>% 
+      filter(bib!="") %>% 
+      filter(loc!="NA") %>% 
+      filter(Unnamed..0!="NA") %>% 
+      filter(Distance<=150) #Filter distances of less than or equal to 150 meters
+
+    #Plot the relationship between the two variables
+    plot(Distance~AverageStylePoints, data = CleanResults, pch = 16, col = "red") 
+    skiLm <- lm(Distance~AverageStylePoints, data = CleanResults) #Create a linear model for the two variables
+    summary(skiLm) #Correlation = (R^2)^1/2 = 0.495
+    ```
+
+2.  What is the correlation of Wind Speed and Distance? \
+
+```{r}
+#Load the packages
+library(ggplot2)
+
+#Plot the relationship between Wind Speed and Distance
+ggplot(CleanResults, aes(x = Distance, y = WindSpeed)) +
+  geom_point(color = "blue") +
+  labs(title = "Scatter Plot of Distance vs Wind Speed",
+       x = "Distance", y = "Wind Speed")
+
+ggplot(CleanResults, aes(x = WindSpeed, y = Distance)) +
+  geom_point(color = "blue", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") + # Add linear regression line
+  labs(title = "Relationship Between Distance and Wind Speed",
+       x = "Wind Speed",
+       y = "Distance") +
+  theme_minimal()
+
+
+```
+>>>>>>> Stashed changes
 
 \
