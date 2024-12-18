@@ -45,12 +45,14 @@ Our data set is the Results of (almost) all important ski jumping competitions f
       filter(gate_points!="NA") %>% 
       filter(bib!="") %>% 
       filter(loc!="NA") %>% 
-      filter(Unnamed..0!="NA") %>% 
+      filter(`Unnamed: 0` !="NA") %>% 
       filter(Distance<=150) #Filter distances of less than or equal to 150 meters
 
     #Plot the relationship between the two variables
-    plot(Distance~AverageStylePoints, data = CleanResults, pch = 16, col = "red") 
+    # plot(Distance~AverageStylePoints, data = CleanResults, pch = 16, col = "red") 
+    plot(AverageStylePoints~Distance, data = CleanResults, pch = 16, col = "red") 
     skiLm <- lm(Distance~AverageStylePoints, data = CleanResults) #Create a linear model for the two variables
+    skiLm <- lm(AverageStylePoints~Distance, data = CleanResults)
     summary(skiLm) #Correlation = (R^2)^1/2 = 0.495
     ```
 
@@ -83,11 +85,13 @@ ggplot(CleanResults, aes(x = WindSpeed, y = Distance)) +
 # Fit a linear model
 model <- lm(Distance ~ WindSpeed, data = CleanResults)
 
+summary(model)
+
 # Perform ANOVA on the model
 anova_results <- anova(model)
 
 # Print results
-print(anova_results)
+# print(anova_results)
 
 
 ```
